@@ -4,7 +4,7 @@ import { UpdateProductDto } from './dto/update_product.dto';
 import { Product } from './entities/product.entity';
 @Injectable()
 export class ProductService {
-    
+
     private Products: Product[] = [];
     private nextId = 1;
 
@@ -12,7 +12,7 @@ export class ProductService {
         const newProduct: Product = {
             id: this.nextId++,
             ProductName: dto.ProductName,
-            ProductCode: dto.ProductName,
+            ProductCode: dto.ProductCode,
             ProductPrice: dto.ProductPrice,
             ProductQuantity: dto.ProductQuantity,
             ProductTag: dto.ProductTag,
