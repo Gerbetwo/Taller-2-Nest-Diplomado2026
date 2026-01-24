@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create_customer.dto';
 
@@ -16,4 +16,10 @@ export class CustomersController {
     findAll() {
         return this.customersService.findAll()
     }
+
+    @Get(':id')
+    findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.customersService.findOne(id);
+    }
+
 }
