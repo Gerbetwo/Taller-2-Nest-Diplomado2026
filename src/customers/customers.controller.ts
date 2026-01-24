@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create_customer.dto';
+import { UpdateCustomerDto } from './dto/update_customer.dto';
 
 @Controller('customers')
 
@@ -20,6 +21,11 @@ export class CustomersController {
     @Get(':id')
     findOne(@Param('id', ParseIntPipe) id: number) {
         return this.customersService.findOne(id);
+    }
+
+    @Patch(':id')
+    update( @Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCustomerDto) {
+        return this.customersService.update(id, dto);
     }
 
 }
