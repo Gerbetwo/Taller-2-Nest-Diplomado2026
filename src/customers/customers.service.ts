@@ -9,16 +9,16 @@ export class CustomersService {
     private nextId = 1;
 
     create(dto: CreateCustomerDto): Customer {
-    const newCustomer: Customer = {
-        id: this.nextId++,
-        fullName: dto.fullName,
-        email: dto.email,
-        phone: dto.phone,
-        isActive: true,
-        createdAt: new Date().toISOString(),
-    };
+        const newCustomer: Customer = {
+            id: this.nextId++,
+            fullName: dto.fullName,
+            email: dto.email,
+            phone: dto.phone,
+            isActive: true,
+            createdAt: new Date().toISOString(),
+        };
 
-    this.customers.push(newCustomer);
+        this.customers.push(newCustomer);
         return newCustomer;
     }
 
