@@ -1,8 +1,10 @@
-export class Customer {
+export class Product {
     id: number;
-    fullName: string;
-    email: string;
-    phone?: string;
+    ProductName: string;
+    ProductCode: string;
+    ProductPrice: Number;
+    ProductQuantity: Number;
+    ProductTag?: string;
     isActive: boolean;
     createdAt: string;
 }

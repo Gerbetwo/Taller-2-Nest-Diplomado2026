@@ -1,6 +1,6 @@
-import { IsString, IsNotEmpty, IsEmail, IsOptional, IsInt, IsNumber } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, IsInt, IsNumber } from "class-validator";
 
-export class CreateCustomerDto {
+export class CreateProductDto {
     @IsString()
     @IsNotEmpty()
     ProductName: string;
