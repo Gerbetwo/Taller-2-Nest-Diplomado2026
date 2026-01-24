@@ -9,7 +9,7 @@ export class CreateProductDto {
     @IsNotEmpty()
     @IsNumber()
     ProductPrice: Number;
-    @IsString()
+    @IsNotEmpty()
     @IsInt()
     ProductQuantity: Number;
     @IsString()
