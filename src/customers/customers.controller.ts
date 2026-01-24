@@ -13,7 +13,7 @@ export class CustomersController {
     }
 
     @Get()
-    read() {
+    findAll() {
         return this.customersService.findAll()
     }
 }
