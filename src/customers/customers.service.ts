@@ -21,23 +21,24 @@ export class CustomersService {
         this.customers.push(newCustomer);
         return newCustomer;
     }
-
+    // Obtener todos los registros de la base de datos Customers
     findAll(): Customer[] {
         return this.customers;
     }
-
+    // Obtener un registro de la base de datos Customers: Customer: <ID>
     findOne(id: number): Customer {
     const found = this.customers.find(c => c.id === id);
         if (!found) throw new NotFoundException(`Customer ${id} no existe`);
         return found;
     }
-
+    // Modificar o actualizar un registro de la base de datos Customers: Customer:[<ID>, <CustomerObject>]
     update(id: number, dto: UpdateCustomerDto): Customer {
         const customer = this.findOne(id);
         Object.assign(customer, dto);
         return customer;
     }
 
+    // Eliminar un registro de la base de datos Customers: Customer: <ID>
     remove(id: number): void {
         const idx = this.customers.findIndex(c => c.id === id);
         if (idx === -1) throw new NotFoundException(`Customer ${id} no existe`);
