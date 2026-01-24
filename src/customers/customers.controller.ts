@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create_customer.dto';
 import { UpdateCustomerDto } from './dto/update_customer.dto';
@@ -26,6 +26,12 @@ export class CustomersController {
     @Patch(':id')
     update( @Param('id', ParseIntPipe) id: number, @Body() dto: UpdateCustomerDto) {
         return this.customersService.update(id, dto);
+    }
+
+    @Delete(':id')
+    @HttpCode(204)
+    remove(@Param('id', ParseIntPipe) id: number) {
+        this.customersService.remove(id);
     }
 
 }
