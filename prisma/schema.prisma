@@ -15,9 +15,9 @@ datasource db {
 }
 
 model Customer {
-  id Int @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   fullName String
-  email String @unique
-  phone String?
+  email    String  @unique
+  phone    String?
   isActive Boolean @default(true)
 }
