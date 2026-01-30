@@ -2,11 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCustomerDto } from './dto/create_customer.dto';
 import { UpdateCustomerDto } from './dto/update_customer.dto';
-import { Customer } from './entities/customer.entity';
+
 @Injectable()
 export class CustomersService {
 
-    private readonly prisma: PrismaService;
+    //private readonly prisma: PrismaService;
+    constructor(private readonly prisma: PrismaService) {}
     // Funcion Asincrona para crear el objeto de prisma
     async create(dto: CreateCustomerDto) {
         return this.prisma.customer.create({
