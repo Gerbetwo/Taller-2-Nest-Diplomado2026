@@ -9,10 +9,10 @@ export class CreateProductDto {
     ProductCode: string;
     @IsNotEmpty()
     @IsNumber()
-    ProductPrice: Number;
+    ProductPrice: number;
     @IsNotEmpty()
     @IsInt()
-    ProductQuantity: Number;
+    ProductQuantity: number;
     @IsString()
     @IsOptional()
     ProductTag?: string;

@@ -1,50 +1,50 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create_product.dto';
 import { UpdateProductDto } from './dto/update_product.dto';
-import { Product } from './entities/product.entity';
+import { PrismaService } from '../prisma/prisma.service';
+
 @Injectable()
 export class ProductService {
-
-    private Products: Product[] = [];
-    private nextId = 1;
-
-    create(dto: CreateProductDto): Product {
-        const newProduct: Product = {
-            id: this.nextId++,
-            ProductName: dto.ProductName,
-            ProductCode: dto.ProductCode,
-            ProductPrice: dto.ProductPrice,
-            ProductQuantity: dto.ProductQuantity,
-            ProductTag: dto.ProductTag,
-            isActive: true,
-            createdAt: new Date().toISOString(),
-        };
-
-        this.Products.push(newProduct);
-        return newProduct;
+    //private readonly prisma: PrismaService;
+    constructor(private readonly prisma: PrismaService) {}
+    // Funcion Asincrona para crear el objeto de prisma
+    async create(dto: CreateProductDto) {
+        return this.prisma.product.create({
+            data: {
+                name: dto.ProductName,
+                code: dto.ProductCode,
+                price: dto.ProductPrice,
+                quantity: dto.ProductQuantity,
+                tag: dto.ProductTag,
+                isActive: true,
+            },
+        });
     }
     // Obtener todos los registros de la base de datos Products
-    findAll(): Product[] {
-        return this.Products;
+    async findAll() {
+        return this.prisma.product.findMany({
+            orderBy: { id: 'asc' },
+        });
     }
     // Obtener un registro de la base de datos Products: Product: <ID>
-    findOne(id: number): Product {
-    const found = this.Products.find(c => c.id === id);
-        if (!found) throw new NotFoundException(`Product ${id} no existe`);
-        return found;
+    async findOne(id: number) {
+        const product = await this.prisma.product.findUnique({ where: { id } });
+        if (!product) throw new NotFoundException(`Produjct ${id} no existe`);
+        return product;
     }
     // Modificar o actualizar un registro de la base de datos Products: Product:[<ID>, <ProductObject>]
-    update(id: number, dto: UpdateProductDto): Product {
-        const Product = this.findOne(id);
-        Object.assign(Product, dto);
-        return Product;
+    async update(id: number, dto: UpdateProductDto) {
+        await this.findOne(id); // asegura 404 si no existe
+        return this.prisma.product.update({
+            where: { id },
+            data: dto,
+        });
     }
 
     // Eliminar un registro de la base de datos Products: Product: <ID>
-    remove(id: number): void {
-        const idx = this.Products.findIndex(c => c.id === id);
-        if (idx === -1) throw new NotFoundException(`Product ${id} no existe`);
-        this.Products.splice(idx, 1);
+    async remove(id: number) {
+        await this.findOne(id);
+        await this.prisma.product.delete({ where: { id } });
     }
 
 }
