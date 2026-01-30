@@ -19,3 +19,14 @@ model Customer {
   phone    String?
   isActive Boolean @default(true)
 }
+
+model Product {
+  id        Int       @id @default(autoincrement)
+  name      String
+  code      String
+  price     Float
+  quantity  Int
+  tag       String?  // Optional field
+  isActive  Boolean
+  createdAt DateTime @default(now())
+}
