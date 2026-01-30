@@ -21,12 +21,29 @@ model Customer {
 }
 
 model Product {
-  id        Int       @id @default(autoincrement())
-  name      String
-  code      String
-  price     Float
-  quantity  Int
-  tag       String?  // Optional field
-  isActive  Boolean
-  createdAt DateTime @default(now())
+  id          Int   @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  description String?
+  price       Float
+  sku         String   @unique
+  stock       Int      @default(0)
+  isActive    Boolean  @default(true)
+  
+  // Timestamps para auditoría
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relaciones
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  @@map("products")
+}
+
+model Category {
+  id       Int    @id @default(autoincrement())
+  name     String    @unique
+  products Product[]
+
+  @@map("categories")
 }

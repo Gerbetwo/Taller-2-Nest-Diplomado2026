@@ -1,19 +1,34 @@
-import { IsString, IsNotEmpty, IsOptional, IsInt, IsNumber } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, IsInt, IsNumber, IsUUID, Min } from "class-validator";
 
 export class CreateProductDto {
     @IsString()
     @IsNotEmpty()
-    ProductName: string;
-    @IsString()
-    @IsNotEmpty()
-    ProductCode: string;
-    @IsNotEmpty()
-    @IsNumber()
-    ProductPrice: number;
-    @IsNotEmpty()
-    @IsInt()
-    ProductQuantity: number;
+    name: string;
+
     @IsString()
     @IsOptional()
-    ProductTag?: string;
+    description?: string;
+
+    @IsString()
+    @IsNotEmpty()
+    sku: string;
+
+    @IsNumber()
+    @Min(0)
+    @IsNotEmpty()
+    price: number; // En el service lo convertiremos a Decimal
+
+    @IsInt()
+    @Min(0)
+    @IsNotEmpty()
+    stock: number;
+
+    @IsNotEmpty()
+    @IsInt()
+    @Min(0)
+    categoryId: number;
+
+    @IsString()
+    @IsOptional()
+    tag?: string; 
 }

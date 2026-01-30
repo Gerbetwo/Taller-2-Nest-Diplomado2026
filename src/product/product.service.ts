@@ -3,6 +3,7 @@ import { CreateProductDto } from './dto/create_product.dto';
 import { UpdateProductDto } from './dto/update_product.dto';
 import { PrismaService } from '../prisma/prisma.service';
 
+
 @Injectable()
 export class ProductService {
     //private readonly prisma: PrismaService;
@@ -11,11 +12,12 @@ export class ProductService {
     async create(dto: CreateProductDto) {
         return this.prisma.product.create({
             data: {
-                name: dto.ProductName,
-                code: dto.ProductCode,
-                price: dto.ProductPrice,
-                quantity: dto.ProductQuantity,
-                tag: dto.ProductTag,
+                name: dto.name,
+                description: dto.description,
+                sku: dto.sku,
+                price: dto.price,
+                stock: dto.stock,
+                categoryId: dto.categoryId,
                 isActive: true,
             },
         });
