@@ -9,17 +9,18 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   constructor() {
-    const url = process.env.DATABASE_URL;
+    const url = process.env.DATABASE_URL
     if (!url) {
-      throw new Error('DATABASE_URL no encontrada en el .env');
+      throw new Error('DATABASE_URL no está cargada (revisa .env en la raíz).')
     }
-
-    // En Prisma 7, el adaptador requiere un pool de 'pg' explícito
-    const pool = new Pool({ connectionString: url });
-    const adapter = new PrismaPg(pool);
-
-    // Pasamos el adaptador a la clase base
-    super({ adapter });
+    super({
+      adapter: new PrismaPg({ connectionString: url }),
+      log: [
+        { level: 'query', emit: 'stdout' },
+        { level: 'error', emit: 'stdout' },
+        { level: 'warn', emit: 'stdout' },
+      ]
+    })
   }
 
   async onModuleInit() {

@@ -15,14 +15,14 @@ export class StudentsService {
         if (!student) throw new NotFoundException(`Student ${studentId} no existe`);
         return this.prisma.studentProfile.upsert({
             where: { studentId },
-            update: {  },
+            update: data,
             create: { studentId, ...data },
         });
     }
     async detail(studentId: number) {
         const student = await this.prisma.student.findUnique({
             where: { id: studentId },
-            include: { Profile: true },
+            include: { profile: true },
         });
         if (!student) throw new NotFoundException(`Student ${studentId} no existe`);
         return student;

@@ -44,14 +44,14 @@ model Student {
   email       String          @unique
   createdAt   DateTime        @default(now())
   enrollments Enrollment[]
-  Profile     StudentProfile?
+  profile     StudentProfile?
 }
 
 model StudentProfile {
   id        Int     @id @default(autoincrement())
   studentId Int     @unique
-  pone      String?
-  Address   String?
+  phone      String?
+  address   String?
   Student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }
 
