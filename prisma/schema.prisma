@@ -50,12 +50,12 @@ model Student {
 model StudentProfile {
   id        Int     @id @default(autoincrement())
   studentId Int     @unique
-  phone      String?
+  phone     String?
   address   String?
   Student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }
 
-model Department {
+model Departament {
   id      Int      @id @default(autoincrement())
   name    String   @unique
   courses Course[]
@@ -65,8 +65,8 @@ model Course {
   id           Int          @id @default(autoincrement())
   code         String       @unique
   title        String
-  departmentId Int
-  department   Department   @relation(fields: [departmentId], references: [id])
+  departamentId Int         @default(autoincrement())
+  departament  Departament  @relation(fields: [departamentId], references: [id])
   enrollments  Enrollment[]
   tags         Tag[]        @relation("CourseToTag")
 }
