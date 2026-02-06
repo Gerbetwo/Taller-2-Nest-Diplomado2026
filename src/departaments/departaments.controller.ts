@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
-import { DepartmentsService } from './departaments.service';
+import { DepartamentsService } from './departaments.service';
 @Controller('departments')
 export class DepartmentsController {
-    constructor(private readonly service: DepartmentsService) { }
+    constructor(private readonly service: DepartamentsService) { }
     
     @Post()
     async create(@Body() body: { name: string }) {
