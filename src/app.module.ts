@@ -6,7 +6,7 @@ import { CustomersModule } from './customers/customers.module';
 import { ProductModule } from './product/product.module';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
-import { DepartmentsModule } from './departments/departments.module';
+import { DepartmentsModule } from './departaments/departaments.module';
 import { CoursesModule } from './courses/courses.module';
 import { StudentsModule } from './students/students.module';
 
