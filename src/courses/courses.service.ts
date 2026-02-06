@@ -8,7 +8,7 @@ export class CoursesService {
     }
     async findAll() {
         return this.prisma.course.findMany({
-            include: { department: true },
+            include: { departament: true },
             orderBy: { id: 'asc' },
         });
     }
@@ -38,7 +38,7 @@ export class CoursesService {
     async detail(courseId: number) {
         const course = await this.prisma.course.findUnique({
             where: { id: courseId },
-            include: { tags: true, department: true },
+            include: { tags: true, departament: true },
         });
         if (!course) throw new NotFoundException(`Course ${courseId} no existe`);
         return course;
