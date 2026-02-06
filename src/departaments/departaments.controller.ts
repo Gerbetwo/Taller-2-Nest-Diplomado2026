@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
-import { DepartmentsService } from './departments.service';
+import { DepartmentsService } from './departaments.service';
 @Controller('departments')
 export class DepartmentsController {
     constructor(private readonly service: DepartmentsService) { }
