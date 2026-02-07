@@ -43,4 +43,26 @@ export class CoursesService {
         if (!course) throw new NotFoundException(`Course ${courseId} no existe`);
         return course;
     }
+
+    // Obtener un registro de la base de datos course: course: <ID>
+    async findOne(id: number) {
+        const course = await this.prisma.course.findUnique({ where: { id } });
+        if (!course) throw new NotFoundException(`courses ${id} no existe`);
+        return course;
+    }
+
+    // Eliminar un registro de la base de datos course: course: <ID>
+    async remove(id: number) {
+        await this.findOne(id);
+        await this.prisma.course.delete({ where: { id } });
+    }
+
+    // Modificar o actualizar un registro de la base de datos Customers: Customer:[<ID>, <CustomerObject>]
+    async update(id: number, data: { code: string; title: string; departamentId: number }) {
+        await this.findOne(id); // asegura 404 si no existe
+        return this.prisma.customer.update({
+            where: { id },
+            data: data,
+        });
+    }
 }

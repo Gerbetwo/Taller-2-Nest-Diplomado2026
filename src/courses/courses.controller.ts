@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, ParseIntPipe, Patch, Post, Put } from '@nestjs/common';
 import { CoursesService } from './courses.service';
+import { UpdateCustomerDto } from 'src/customers/dto/update-customer.dto';
 @Controller('courses')
 export class CoursesController {
     constructor(private readonly service: CoursesService) { }
@@ -18,5 +19,21 @@ export class CoursesController {
     @Post(':id/tags')
     async addTags(@Param('id', ParseIntPipe) id: number, @Body() body: { tags: string[] }) {
         return this.service.addTags(id, body.tags);
+    }
+    // PATCH: funvcion to create customer Customer.update(<id>, <CustomerObject>)
+    @Patch(':id')
+    async update(@Param('id', ParseIntPipe) id: number, @Body() body: { code: string; title: string; departamentId: number }) {
+        return this.service.update(id, body);
+    }
+    // PATCH: funvcion to create customer Customer.update(<id>, <CustomerObject>)
+    @Put(':id')
+    async upgrade(@Param('id', ParseIntPipe) id: number, @Body() body: { code: string; title: string; departamentId: number }) {
+        return this.service.update(id, body);
+    }
+    // DELETE: funvcion to create customer Customer.remove(<id>)
+    @Delete(':id')
+    @HttpCode(204)
+    async remove(@Param('id', ParseIntPipe) id: number) {
+        await this.service.remove(id);
     }
 }
