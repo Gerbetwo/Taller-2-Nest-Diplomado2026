@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 @Injectable()
 export class CoursesService {
     constructor(private readonly prisma: PrismaService) { }
-    async create(data: { code: string; title: string; departmentId: number }) {
+    async create(data: { code: string; title: string; departamentId: number }) {
         return this.prisma.course.create({ data });
     }
     async findAll() {

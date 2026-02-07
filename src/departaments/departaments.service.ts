@@ -12,7 +12,7 @@ export class DepartamentsService {
     async findAll() {
         return this.prisma.departament.findMany({ orderBy: { id: 'asc' } });
     }
-    
+
     // Obtener un registro de la base de datos Departaments: <ID>
     async findOne(id: number) {
         const departaments = await this.prisma.departament.findUnique({ where: { id } });
@@ -21,12 +21,12 @@ export class DepartamentsService {
     }
 
     async findOneWithCourses(id: number) {
-    const dept = await this.prisma.departament.findUnique({
-        where: { id },
-        include: { courses: { orderBy: { id: 'asc' } } },
-    });
-    
-    if (!dept) throw new NotFoundException(`departament ${id} no existe`);
+        const dept = await this.prisma.departament.findUnique({
+            where: { id },
+            include: { courses: { orderBy: { id: 'asc' } } },
+        });
+
+        if (!dept) throw new NotFoundException(`departament ${id} no existe`);
         return dept;
     }
 }

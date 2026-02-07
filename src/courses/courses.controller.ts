@@ -4,7 +4,7 @@ import { CoursesService } from './courses.service';
 export class CoursesController {
     constructor(private readonly service: CoursesService) { }
     @Post()
-    async create(@Body() body: { code: string; title: string; departmentId: number }) {
+    async create(@Body() body: { code: string; title: string; departamentId: number }) {
         return this.service.create(body);
     }
     @Get()

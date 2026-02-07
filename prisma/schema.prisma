@@ -65,7 +65,7 @@ model Course {
   id           Int          @id @default(autoincrement())
   code         String       @unique
   title        String
-  departamentId Int         @default(autoincrement())
+  departamentId Int         
   departament  Departament  @relation(fields: [departamentId], references: [id])
   enrollments  Enrollment[]
   tags         Tag[]        @relation("CourseToTag")
